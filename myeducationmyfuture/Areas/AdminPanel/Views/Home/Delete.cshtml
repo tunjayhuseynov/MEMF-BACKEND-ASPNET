@@ -1,0 +1,57 @@
+﻿@model myeducationmyfuture.Models.Blog
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div style="padding-left: 10px">
+    <h4>Blog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Title
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            Date
+        </dt>
+
+        <dd>
+            @Model.date.Value.ToString("dd MMMM yyyy")
+        </dd>
+
+        <dt>
+            Text
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.text)
+        </dd>
+
+        <dt>
+           Image
+        </dt>
+
+        <dd>
+            <img src="~/public/img/uploaded/@Html.DisplayFor(model => model.imagepath)" height="50" />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

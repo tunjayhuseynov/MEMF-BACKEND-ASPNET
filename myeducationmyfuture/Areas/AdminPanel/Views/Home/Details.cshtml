@@ -1,0 +1,51 @@
+﻿@model myeducationmyfuture.Models.Blog
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div style="padding-left: 10px">
+    <h4>Blog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Title
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            Date
+        </dt>
+
+        <dd>
+            @Model.date.Value.ToString("dd MMMM yyyy")
+        </dd>
+
+        <dt>
+            Text
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.text)
+        </dd>
+
+        <dt>
+            Image
+        </dt>
+
+        <dd>
+            <img src="~/public/img/uploaded/@Html.DisplayFor(model => model.imagepath)" height="50"/>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

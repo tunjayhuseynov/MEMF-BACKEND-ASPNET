@@ -1,0 +1,100 @@
+﻿@model myeducationmyfuture.Models.ModelDB
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="crumbs-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="crumbs-inner">
+                    <h2>@Model.news.title</h2>
+                    <ul>
+                        <li><a href="@Url.Action("Index")">Home</a></li>
+                        <li><span>News Details</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="blog-details ptb--120">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="blog-info">
+                    <div class="blog-thumbnail">
+                        <img src="~/public/img/uploaded/@Model.news.imagepath" height="437" alt="blog thumbnail">
+                    </div>
+                    <h2 class="blog-title"><a href="#">@Model.news.title</a></h2>
+                    <div class="blog-meta">
+                        <ul>
+                            <li><i class="fa fa-calendar"></i>@Model.news.date.Value.ToString("dd MMMM yyyy")</li>
+                        </ul>
+                    </div>
+                    <div class="blog-summery" style="word-wrap: break-word;">
+                        <p>
+                            @Model.news.text
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="sidebar--area">
+
+
+
+                    <div class="widget widget-recent-post">
+                        <div class="widget-title">
+                            <h2>Recent Post</h2>
+                        </div>
+                        @{ var say = Model.blogList.Count;
+                            int dbbas = Model.blogList.OrderByDescending(w => w.id).FirstOrDefault().id;
+                            }
+                        @for (int i = 0; i < (say>4?4:say); i++)
+                        {
+                            var md = Model.blogList.OrderByDescending(w => w.id).Skip(i).FirstOrDefault();
+                            if (md.id == Model.news.id) { continue; }
+                            <div class="recent--post-list">
+                                <div class="rc-single-post">
+                                    <div class="meta-thumb">
+                                        <a href="@Url.Action("news", new { id = md.id })" class="ic"><img src="~/public/img/uploaded/@md.imagepath" height="66" alt="post thumb"></a>
+                                    </div>
+                                    <div class="meta--content">
+                                        <a href="@Url.Action("news", new { id = md.id })">@md.title</a>
+                                        <span class="up-time">@md.date.Value.ToString("dd MMMM yyyy") </span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section News{
+    <script src="~/public/js/jquery-3.2.0.min.js"></script>
+    <script src="~/public/js/jquery-ui.js"></script>
+    <script src="~/public/js/bootstrap.min.js"></script>
+    <script src="~/public/js/jquery.slicknav.min.js"></script>
+    <script src="~/public/js/owl.carousel.min.js"></script>
+    <script src="~/public/js/magnific-popup.min.js"></script>
+    <script src="~/public/js/counterup.js"></script>
+    <script src="~/public/js/jquery.waypoints.min.js"></script>
+    <script src="~/public/js/jquery.mb.YTPlayer.min.js"></script>
+    <script src="~/public/js/theme.js"></script>}

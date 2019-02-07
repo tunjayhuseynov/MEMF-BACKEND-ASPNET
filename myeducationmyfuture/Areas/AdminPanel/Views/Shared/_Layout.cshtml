@@ -1,0 +1,90 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/AdminPanel/assets/images/favicon.png">
+    <title>ADMIN PANEL</title>
+    <!-- Custom CSS -->
+    <link href="~/Areas/AdminPanel/assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Areas/AdminPanel/dist/css/style.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper">
+
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="col-md-12">
+                    <h4 style="color: white" class="float-left">Admin Panel</h4>
+                    <h3> <a class="float-right" style="color: white" href="@Url.Action("LogOut")">EXIT</a> </h3>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="p-t-30">
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index")" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">News List</span></a></li>
+                        <li class="sidebar-item">
+
+                                <a class="sidebar-link sidebar-link" style="color: white; margin: 10px 10px; padding: 10px" href="@Url.Action("Create")">CREATE NEW</a>
+
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+    </div>
+    <div class="page-wrapper">
+        @RenderBody()
+
+    </div>
+
+
+    <script src="~/Areas/AdminPanel/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/Areas/AdminPanel/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="~/Areas/AdminPanel/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/Areas/AdminPanel//assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/Areas/AdminPanel/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="~/Areas/AdminPanel/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/Areas/AdminPanel/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/Areas/AdminPanel/dist/js/custom.min.js"></script>
+    <script src="~/Areas/AdminPanel/assets/libs/flot/excanvas.js"></script>
+    <script src="~/Areas/AdminPanel/assets/libs/flot/jquery.flot.js"></script>
+    <script src="~/Areas/AdminPanel/assets/libs/flot/jquery.flot.pie.js"></script>
+    <script src="~/Areas/AdminPanel/assets/libs/flot/jquery.flot.time.js"></script>
+    <script src="~/Areas/AdminPanel/assets/libs/flot/jquery.flot.stack.js"></script>
+    <script src="~/Areas/AdminPanel/assets/libs/flot/jquery.flot.crosshair.js"></script>
+    <script src="~/Areas/AdminPanel/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="~/Areas/AdminPanel/dist/js/pages/chart/chart-page-init.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+﻿@model myeducationmyfuture.Models.ModelDB
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="crumbs-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="crumbs-inner">
+                    <h2>News</h2>
+                    <ul>
+                        <li><a href=@Url.Action("Index")>Home</a></li>
+                        <li><span>News</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="blog-post-area">
+    <div class="container">
+        <div class="row">
+            <div class="blog-list">
+                @{ 
+                    int sayi = Model.blogList.Count;
+                    int begin = Model.Index % 6;
+                    int qaliq = Model.Index*6>sayi?(sayi - (Model.Index - 1) * 6):6;
+                    if(sayi > 0)
+                    {
+                        int dbbas = Model.blogList.FirstOrDefault().id;
+                    }
+                }
+
+                @for (int i = ((Model.Index-1)*6); i < (Model.Index>1?((Model.Index-1) * 6) + qaliq:sayi>6?6:sayi); i++)
+                {
+
+                    var blog = Model.blogList.OrderByDescending(w => w.id).Skip(i).FirstOrDefault();
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="list-item">
+                            <div class="blog-thumbnail">
+                                <a href="@Url.Action("news", new { id = blog.id })" class="ic"><img src="~/public/img/uploaded/@blog.imagepath" alt="blog thumbnail" height="300"></a>
+                            </div>
+                            <h2 class="blog-title"><a href="@Url.Action("news", new { id = blog.id })">@blog.title</a></h2>
+                            <div class="blog-meta">
+                                <ul>
+                                    <li><i class="fa fa-calendar"></i>@blog.date.Value.ToString("dd.MM.yyyy")</li>
+                                </ul>
+                            </div>
+                            <div class="blog-summery">
+                                @if (blog.text.Length > 30) {
+                                <p> @blog.text.Substring(0, 30)...</p>
+                                  } else {
+                                <p> @blog.text.Substring(0, blog.text.Length).ToString()...</p> 
+                                    }
+                            </div>
+                            <a href="@Url.Action("news", new { id = blog.id })" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="pagination-area">
+    <div class="container">
+        <div class="pagination">
+            <ul>
+                @{
+                    int list = Model.blogList.Count;
+
+                    int blok = (int)list / 6;
+
+                }
+                @if (Model.Index > 1)
+                {
+                    <li><a href="@Url.Action("Blog", new { id = Model.Index-1 })">Previous</a></li>
+                }
+                @if (blok > 4 && Model.Index > 3)
+                {
+                    int a = Model.Index - 2;
+                    int b = Model.Index - 1;
+                    int c = Model.Index + 1;
+
+                    <li><a href="@Url.Action("Blog", new { id = a})"> @a</a></li>
+                    <li><a href="@Url.Action("Blog", new { id = b})"> @b</a></li>
+                    <li><span>@Model.Index</span></li>
+                    if (c < blok + 2)
+                    {
+                        <li><a href="@Url.Action("Blog", new { id = c})"> @c</a></li>
+                    }
+
+                }
+                else if (blok < 4 || (blok > 4 && Model.Index < 4))
+                {
+
+                    for (int i = 1; i < (blok >= 1 ? blok + 1 : 1) + 1; i++)
+                    {
+                        if (i > 4)
+                        {
+                            break;
+                        }
+                        <li><a href="@Url.Action("Blog", new { id = i })">@i</a></li>
+
+                    }
+
+                }
+                @if (Model.Index <= blok)
+                {
+                    <li><a href="@Url.Action("Blog", new { id = Model.Index+1 })">Next</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Blogjs{
+    <script src="~/public/js/jquery-3.2.0.min.js"></script>
+    <script src="~/public/js/jquery-ui.js"></script>
+    <script src="~/public/js/bootstrap.min.js"></script>
+    <script src="~/public/js/jquery.slicknav.min.js"></script>
+    <script src="~/public/js/owl.carousel.min.js"></script>
+    <script src="~/public/js/magnific-popup.min.js"></script>
+    <script src="~/public/js/counterup.js"></script>
+    <script src="~/public/js/jquery.waypoints.min.js"></script>
+    <script src="~/public/js/jquery.mb.YTPlayer.min.js"></script>
+    <script src="~/public/js/theme.js"></script>
+
+}
